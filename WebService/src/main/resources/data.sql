@@ -1,0 +1,16 @@
+INSERT INTO public.city (pk_city, name, inhabitants, most_touristic_place, most_relevant_hotel) VALUES
+    (1,'Bogotá', 7650231, 'Plaza de Bolivar', 'Hotel Tequendama'),
+    (2,'Medellin', 605823, 'Parque Explora', 'Dann Carlton Hotel'),
+    (3,'New York', 10658962, 'Central Park', 'Four Season Hotel'),
+    (4,'Berlin', 6326589, 'Whitnall Park', 'Hotel Nhow Berlín:'),
+    (5,'Münich', 4021456, 'Marienplatz', 'Hotel Nhow Berlín:'),
+    (6,'Paris', 8456258, 'Torre Eiffel', 'La Planque Hotel'),
+    (7,'Moscú', 4596324, 'Plaza Roja', 'Golden Garden Hotel'),
+    (8,'La Paz', 1569874, 'Valle de Luna', 'Hotel Europa'),
+    (9,'Buenos Aires', 2356987, 'Plaza de Mayo', 'Alvear Palace Hotel'),
+    (10,'Rio de Janeiro', 5896745, 'Cristo Redentor', 'Copacabana Palace'),
+    (11,'Cali', 6896357, 'Iglesia Ermita', 'Dann Carlton Hotel'),
+    (12,'Roma', 1256874, 'Basilica de San Pedro', 'Napoleon Hotel'),
+    (13,'Barcelona', 4562398, 'Basilica de la Sagrada Familia', 'Ciutat de Barcelona Hotel'),
+    (14,'Boston', 4025698, 'Harvard University', 'Four Season'),
+    (15,'San Francisco', 3759895, 'Golden Gate Bridge', 'Four Season');
