@@ -3,10 +3,13 @@ package App.BusinessLayer.Controllers;
 import App.BusinessLayer.Services.ToDoService;
 import App.DataLayer.Models.ToDo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParseException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -21,27 +24,48 @@ public class ToDoController {
     }
 
     @GetMapping("/{id}")
-    public ToDo findById(@PathVariable int id){
-        return toDoService.findById(id);
+    public ResponseEntity<ToDo> findById(@PathVariable int id){
+        try {
+            return ResponseEntity.ok(toDoService.findById(id));
+        }catch (  JsonParseException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }catch (EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
+        }
+
     }
 
     @PostMapping
-    public ToDo create(@RequestBody ToDo toDo){
-        return toDoService.save(toDo);
+    public ResponseEntity<ToDo> create(@RequestBody ToDo toDo){
+        return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.save(toDo));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ToDo> update(@RequestBody ToDo toDo){
-        ToDo toDo1 = toDoService.findById(toDo.getId());
-        if (toDo1 != null){
-            return ResponseEntity.ok(toDoService.save(toDo));
-        } else{
+        try {
+            ToDo toDo1 = toDoService.findById(toDo.getId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.save(toDo));
+
+        }catch (JsonParseException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }catch (EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
         }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id){
-        toDoService.deleteById(id);
+    public ResponseEntity<ToDo> deleteById(@PathVariable int id){
+
+        try {
+            toDoService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }catch (EmptyResultDataAccessException e ){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }catch (JsonParseException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
     }
 }
