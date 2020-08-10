@@ -38,8 +38,11 @@ public class CityController {
 
     @PostMapping
     public ResponseEntity<CityModel> create(@RequestBody CityModel cityModel){
-        return ResponseEntity.status(HttpStatus.CREATED).body(cityService.save(cityModel));
-    }
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(cityService.save(cityModel));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }    }
 
     @PutMapping("/{id}")
     public ResponseEntity<CityModel> update(@RequestBody CityModel cityModel){

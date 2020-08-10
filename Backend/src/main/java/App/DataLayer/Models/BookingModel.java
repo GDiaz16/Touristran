@@ -1,5 +1,8 @@
 package App.DataLayer.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,6 +11,9 @@ import java.sql.Date;
 @Entity
 @Data
 @Table(name = "Booking")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "pk_BOOKING")
 public class BookingModel {
     public BookingModel() {}
 
@@ -22,12 +28,12 @@ public class BookingModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int PK_BOOKING;
 
-    @ManyToOne
-    @JoinColumn(name = "PK_TOURIST", nullable = false)
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PK_TOURIST", nullable = true)
     private TouristModel FK_TOURIST;
 
-    @ManyToOne
-    @JoinColumn(name = "PK_CITY", nullable = false)
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PK_CITY", nullable = true)
     private CityModel FK_CITY;
 
     private Date date;

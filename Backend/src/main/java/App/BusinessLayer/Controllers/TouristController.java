@@ -38,8 +38,11 @@ public class TouristController {
 
     @PostMapping
     public ResponseEntity<TouristModel> create(@RequestBody TouristModel touristModel){
-        return ResponseEntity.status(HttpStatus.CREATED).body(touristService.save(touristModel));
-    }
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(touristService.save(touristModel));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }    }
 
     @PutMapping("/{id}")
     public ResponseEntity<TouristModel> update(@RequestBody TouristModel touristModel){

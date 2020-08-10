@@ -1,14 +1,22 @@
 package App.DataLayer.Models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "Tourist")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "pk_TOURIST")
 public class TouristModel {
     public TouristModel() {
     }
@@ -30,7 +38,7 @@ public class TouristModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int PK_TOURIST;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "PK_CITY", nullable = true)
     private CityModel FK_CITY;
 
@@ -48,6 +56,6 @@ public class TouristModel {
 
     private boolean hasCreditCard;
 
-    @OneToMany(mappedBy = "FK_TOURIST", cascade = CascadeType.ALL)
-    private Set<BookingModel> bookingModelSet;
+    @OneToMany(mappedBy = "FK_TOURIST", orphanRemoval = true)
+    private List<BookingModel> bookingModelSet;
 }

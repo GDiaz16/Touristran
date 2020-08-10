@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cities")
+@RequestMapping("/web-api/cities")
 public class CityController {
     @Autowired
     private CityService cityService;
@@ -36,8 +36,4 @@ public class CityController {
 
     }
 
-    @PostMapping
-    public ResponseEntity<CityModel> create(@RequestBody CityModel cityModel){
-        return ResponseEntity.status(HttpStatus.CREATED).body(cityService.save(cityModel));
-    }
 }

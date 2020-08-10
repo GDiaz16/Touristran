@@ -38,7 +38,12 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<BookingModel> create(@RequestBody BookingModel bookingModel){
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
+
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
     @PutMapping("/{id}")
