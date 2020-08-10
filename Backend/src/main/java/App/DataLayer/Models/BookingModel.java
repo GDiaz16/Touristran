@@ -1,6 +1,5 @@
 package App.DataLayer.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
@@ -13,28 +12,28 @@ import java.sql.Date;
 @Table(name = "Booking")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "pk_BOOKING")
+        property = "pkBooking")
 public class BookingModel {
     public BookingModel() {}
 
-    public BookingModel(TouristModel FK_TOURIST, CityModel FK_CITY, Date date) {
-        this.FK_TOURIST = FK_TOURIST;
-        this.FK_CITY = FK_CITY;
+    public BookingModel(TouristModel fkTourist, CityModel fkCity, Date date) {
+        this.fkTourist = fkTourist;
+        this.fkCity = fkCity;
         this.date = date;
     }
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int PK_BOOKING;
+    private int pkBooking;
 
     @ManyToOne
-    @JoinColumn(name = "PK_TOURIST", nullable = true)
-    private TouristModel FK_TOURIST;
+    @JoinColumn(name = "pkTourist", nullable = true)
+    private TouristModel fkTourist;
 
     @ManyToOne
-    @JoinColumn(name = "PK_CITY", nullable = true)
-    private CityModel FK_CITY;
+    @JoinColumn(name = "pkCity", nullable = true)
+    private CityModel fkCity;
 
     private Date date;
 }

@@ -1,6 +1,7 @@
 package App.DataLayer.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table(name = "City")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "pk_CITY")
+        property = "pkCity")
 public class CityModel {
     public CityModel(String name, int inhabitants, String mostTouristicPlace,
                      String mostRelevantHotel) {
@@ -28,7 +29,7 @@ public class CityModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int PK_CITY;
+    private int pkCity;
 
     private String name;
 
@@ -38,9 +39,11 @@ public class CityModel {
 
     private String mostRelevantHotel;
 
-    @OneToMany(mappedBy = "FK_CITY", orphanRemoval = true)
+    @OneToMany(mappedBy = "fkCity", orphanRemoval = true)
+    @JsonIgnore
     private List<BookingModel> bookingModelSet;
 
-    @OneToMany(mappedBy = "FK_CITY", orphanRemoval = true)
+    @OneToMany(mappedBy = "fkCity", orphanRemoval = true)
+    @JsonIgnore
     private List<TouristModel> touristModels;
 }

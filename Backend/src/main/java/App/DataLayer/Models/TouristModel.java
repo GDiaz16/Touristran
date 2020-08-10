@@ -1,30 +1,29 @@
 package App.DataLayer.Models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "Tourist")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "pk_TOURIST")
+        property = "pkTourist")
 public class TouristModel {
     public TouristModel() {
     }
 
-    public TouristModel(CityModel FK_CITY, String name, Date birthday, String id,
+    public TouristModel(CityModel fkCity, String name, Date birthday, String id,
                         String idType, int travelFrequencyInMonths,
                         double budget, boolean hasCreditCard) {
-        this.FK_CITY = FK_CITY;
+        this.fkCity = fkCity;
         this.name = name;
         this.birthday = birthday;
         this.id = id;
@@ -36,11 +35,11 @@ public class TouristModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int PK_TOURIST;
+    private int pkTourist;
 
     @ManyToOne
     @JoinColumn(name = "PK_CITY", nullable = true)
-    private CityModel FK_CITY;
+    private CityModel fkCity;
 
     private String name;
 
@@ -56,6 +55,7 @@ public class TouristModel {
 
     private boolean hasCreditCard;
 
-    @OneToMany(mappedBy = "FK_TOURIST", orphanRemoval = true)
+    @OneToMany(mappedBy = "fkTourist", orphanRemoval = true)
+    @JsonIgnore
     private List<BookingModel> bookingModelSet;
 }

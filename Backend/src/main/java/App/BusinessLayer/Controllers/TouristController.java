@@ -48,7 +48,7 @@ public class TouristController {
     public ResponseEntity<TouristModel> update(@RequestBody TouristModel touristModel){
         try {
             TouristModel touristModel1 =
-                    touristService.findById(touristModel.getPK_TOURIST());
+                    touristService.findById(touristModel.getPkTourist());
             return ResponseEntity.status(HttpStatus.CREATED).body(touristService.save(touristModel));
 
         }catch (JsonParseException e){

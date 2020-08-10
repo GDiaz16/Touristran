@@ -47,7 +47,7 @@ public class CityController {
     @PutMapping("/{id}")
     public ResponseEntity<CityModel> update(@RequestBody CityModel cityModel){
         try {
-            CityModel cityModel1 = cityService.findById(cityModel.getPK_CITY());
+            CityModel cityModel1 = cityService.findById(cityModel.getPkCity());
             return ResponseEntity.status(HttpStatus.CREATED).body(cityService.save(cityModel));
 
         }catch (JsonParseException e){

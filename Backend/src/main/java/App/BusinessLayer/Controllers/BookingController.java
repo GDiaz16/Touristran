@@ -2,6 +2,8 @@ package App.BusinessLayer.Controllers;
 
 import App.BusinessLayer.Services.BookingService;
 import App.DataLayer.Models.BookingModel;
+import App.DataLayer.Models.CityModel;
+import App.DataLayer.Models.TouristModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParseException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -36,6 +38,16 @@ public class BookingController {
 
     }
 
+    @GetMapping("/user")
+    public List<BookingModel> findByfkTourist(@RequestBody TouristModel touristModel){
+        return bookingService.findByfkTourist(touristModel);
+    }
+
+    @GetMapping("/city")
+    public List<BookingModel> findByfkTourist(@RequestBody CityModel cityModel){
+        return bookingService.findByfkCity(cityModel);
+    }
+
     @PostMapping
     public ResponseEntity<BookingModel> create(@RequestBody BookingModel bookingModel){
 
@@ -50,7 +62,7 @@ public class BookingController {
     public ResponseEntity<BookingModel> update(@RequestBody BookingModel bookingModel){
         try {
             BookingModel bookingModel1 =
-                    bookingService.findById(bookingModel.getPK_BOOKING());
+                    bookingService.findById(bookingModel.getPkBooking());
             return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
 
         }catch (JsonParseException e){
