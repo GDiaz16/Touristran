@@ -28,11 +28,11 @@ public class BookingModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int PK_BOOKING;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PK_TOURIST", nullable = true)
     private TouristModel FK_TOURIST;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PK_CITY", nullable = true)
     private CityModel FK_CITY;
 

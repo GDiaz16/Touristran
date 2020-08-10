@@ -38,7 +38,7 @@ public class TouristModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int PK_TOURIST;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "PK_CITY", nullable = true)
     private CityModel FK_CITY;
 

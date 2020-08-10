@@ -40,4 +40,7 @@ public class CityModel {
 
     @OneToMany(mappedBy = "FK_CITY", orphanRemoval = true)
     private List<BookingModel> bookingModelSet;
+
+    @OneToMany(mappedBy = "FK_CITY", orphanRemoval = true)
+    private List<TouristModel> touristModels;
 }
