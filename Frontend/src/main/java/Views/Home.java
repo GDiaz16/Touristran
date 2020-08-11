@@ -14,6 +14,8 @@ public class Home extends javax.swing.JPanel {
     /**
      * Creates new form Home
      */
+    private String option = "";
+
     public Home() {
 
         initComponents();
@@ -472,7 +474,7 @@ public class Home extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Turistas");
+        jLabel2.setText("Bienvenido a Touristran");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton5.setBackground(new java.awt.Color(0, 153, 51));
@@ -517,11 +519,12 @@ public class Home extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,14 +541,22 @@ public class Home extends javax.swing.JPanel {
         }
         this.jPanel2.revalidate();
         this.jPanel2.repaint();
+
+        this.jLabel2.setText("Turistas registrados");
+        this.jLabel4.setText("Registrar turista");
+        this.option = "turistas";
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.jPanel2.removeAll();
-        this.jPanel2.add(new Cities());
+        this.jPanel2.add(new Cities(false));
         this.jPanel2.revalidate();
         this.jPanel2.repaint();
+
+        this.jLabel2.setText("Ciudades registradas");
+        this.jLabel4.setText("Ingresar ciudad");
+        this.option = "ciudades";
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -555,20 +566,36 @@ public class Home extends javax.swing.JPanel {
         this.jPanel2.revalidate();
         this.jPanel2.repaint();
 
+        this.jLabel2.setText("Lista de reservaciones");
+        this.jLabel4.setText("Hacer reservación");
+        this.option = "reservas";
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        this.jDialog3.setVisible(true);
-        this.jDialog3.pack();
-        this.jDialog3.setLocationRelativeTo(this.getParent());
 
-        for (int i = 0; i < 15; i++) {
-            this.jPanel3.add(new Tourists());
+//        for (int i = 0; i < 15; i++) {
+//            this.jPanel3.add(new Tourists());
+//        }
+
+        switch (this.option) {
+            case "turistas":
+                this.jDialog2.setVisible(true);
+                this.jDialog2.pack();
+                this.jDialog2.setLocationRelativeTo(this.getParent());
+                break;
+            case "ciudades":
+                this.jDialog1.setVisible(true);
+                this.jDialog1.pack();
+                this.jDialog1.setLocationRelativeTo(this.getParent());
+                break;
+
+            case "reservas":
+                this.jDialog3.setVisible(true);
+                this.jDialog3.pack();
+                this.jDialog3.setLocationRelativeTo(this.getParent());
+                break;
         }
-
-//        this.jDialog2.setVisible(true);
-//        this.jDialog2.pack();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

@@ -5,6 +5,8 @@
  */
 package Views;
 
+import java.awt.Color;
+
 /**
  *
  * @author gonza
@@ -13,11 +15,18 @@ public class Cities extends javax.swing.JPanel {
 
     /**
      * Creates new form Cities
+     * @param isImport
      */
-    public Cities() {
+    public Cities(boolean isImport) {
         initComponents();
         this.setSize(600, 500);
-
+        if (isImport) {
+            this.jButton1.setVisible(false);
+            this.jButton2.setVisible(false);
+            this.jButton3.setVisible(false);
+        } else {
+            this.jButton4.setVisible(false);
+        }
     }
 
     /**
@@ -117,14 +126,14 @@ public class Cities extends javax.swing.JPanel {
         jLabel6.setText("Nombre");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField2.setToolTipText("");
+        jTextField2.setEnabled(false);
         jTextField2.setName("AAAA-MM-DD"); // NOI18N
 
-        jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField3.setToolTipText("");
+        jTextField3.setEnabled(false);
         jTextField3.setName("AAAA-MM-DD"); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
@@ -173,14 +182,14 @@ public class Cities extends javax.swing.JPanel {
         jLabel9.setText("Sitio más turistico");
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField4.setEditable(false);
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField4.setToolTipText("");
+        jTextField4.setEnabled(false);
         jTextField4.setName("AAAA-MM-DD"); // NOI18N
 
-        jTextField5.setEditable(false);
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField5.setToolTipText("");
+        jTextField5.setEnabled(false);
         jTextField5.setName("AAAA-MM-DD"); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(255, 153, 0));
@@ -301,6 +310,12 @@ public class Cities extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.jButton2.setBackground(new Color(51,153,0));
+        this.jButton2.setText("Guardar");
+        this.jTextField2.setEnabled(true);
+        this.jTextField3.setEnabled(true);
+        this.jTextField4.setEnabled(true);
+        this.jTextField5.setEnabled(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
