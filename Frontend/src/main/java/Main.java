@@ -37,7 +37,8 @@ public class Main {
         Home home = new Home();
         frame.setContentPane(home);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1000, 800);
+        frame.setLocation(200, 100);
         frame.setVisible(true);
         frame.setResizable(false);
         frame.pack();
