@@ -20,13 +20,13 @@ public class TouristModel {
     public TouristModel() {
     }
 
-    public TouristModel(CityModel fkCity, String name, Date birthday, String id,
+    public TouristModel(CityModel fkCity, String name, Date birthday, String idOfTourist,
                         String idType, int travelFrequencyInMonths,
                         double budget, boolean hasCreditCard) {
         this.fkCity = fkCity;
         this.name = name;
         this.birthday = birthday;
-        this.id = id;
+        this.idOfTourist = idOfTourist;
         this.idType = idType;
         this.travelFrequencyInMonths = travelFrequencyInMonths;
         this.budget = budget;
@@ -38,14 +38,14 @@ public class TouristModel {
     private int pkTourist;
 
     @ManyToOne
-    @JoinColumn(name = "PK_CITY", nullable = true)
+    @JoinColumn(name = "pkCity", nullable = true)
     private CityModel fkCity;
 
     private String name;
 
     private Date birthday;
 
-    private String id;
+    private String idOfTourist;
 
     private String idType;
 

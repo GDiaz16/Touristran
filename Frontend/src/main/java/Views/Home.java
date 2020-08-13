@@ -5,6 +5,10 @@
  */
 package Views;
 
+import DataAccessObjects.TouristDAO;
+import Entities.TouristEntity;
+import java.util.List;
+
 /**
  *
  * @author gonza
@@ -492,7 +496,6 @@ public class Home extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Agregar turista");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -536,9 +539,15 @@ public class Home extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.jPanel2.removeAll();
-        for (int i = 0; i < 20; i++) {
-            this.jPanel2.add(new Tourists());
-        }
+//        List<TouristEntity> touristsList = new TouristDAO().getAllTourist();
+//        for (TouristEntity touristsEntity : touristsList) {
+//            this.jPanel2.add(new Tourists(touristsEntity));
+//            System.out.println(touristsEntity);
+//        }
+
+        TouristEntity touristEntity = new  TouristDAO().getTourist(2);
+        
+        this.jPanel2.add(new Tourists(touristEntity));
         this.jPanel2.revalidate();
         this.jPanel2.repaint();
 
@@ -620,9 +629,7 @@ public class Home extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.jDialog2.setVisible(true);
-        this.jDialog2.pack();
-        this.jDialog2.setLocationRelativeTo(this.getParent());
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
 

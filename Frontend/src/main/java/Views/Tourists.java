@@ -5,7 +5,8 @@
  */
 package Views;
 
-import java.awt.Color;
+import DataAccessObjects.CityDAO;
+import Entities.TouristEntity;
 
 /**
  *
@@ -13,14 +14,28 @@ import java.awt.Color;
  */
 public class Tourists extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Turistas
-     */
-    
-    public Tourists() {
+    TouristEntity touristEntity;
+
+    public Tourists(TouristEntity touristEntity) {
         initComponents();
-        //this.setVisible(true);
         this.setSize(400, 200);
+        this.touristEntity = touristEntity;
+        // Datos iniciales
+        this.jTextField2.setText(this.touristEntity.getName());
+        this.jTextField3.setText(this.touristEntity.getIdOfTourist());
+        this.jTextField4.setText(this.touristEntity.getName());
+
+        this.jTextField4.setText(this.touristEntity.getName());
+        this.jTextField5.setText(this.touristEntity.getBirthday().toString());
+        this.jTextField6.setText(this.touristEntity.getIdOfTourist());
+        this.jTextField7.setText(String.valueOf(this.touristEntity.getTravelFrequencyInMonths()));
+        this.jTextField1.setText(String.valueOf(this.touristEntity.getBudget()));
+
+        this.jComboBox1.setSelectedItem(this.touristEntity.getIdType());
+        this.jComboBox2.setSelectedItem((this.touristEntity.hasCreditCard()) ? "SI" : "NO");
+        String city = (new CityDAO()).getCity(touristEntity.getFkCity()).getName();
+        this.jComboBox3.setSelectedItem(city);
+
     }
 
     /**
@@ -312,11 +327,21 @@ public class Tourists extends javax.swing.JPanel {
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField2.setToolTipText("");
         jTextField2.setName("AAAA-MM-DD"); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField3.setToolTipText("");
         jTextField3.setName("AAAA-MM-DD"); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -462,6 +487,14 @@ public class Tourists extends javax.swing.JPanel {
         this.jDialog3.pack();
         this.jDialog3.setLocationRelativeTo(this.getParent());
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,7 +11,7 @@
 	<groupId>com.Touristran</groupId>
 	<artifactId>Backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Touristran</name>
+	<name>TouristranWebService</name>
 	<description>Web App for Quileia</description>
 
 	<properties>
