@@ -34,9 +34,9 @@
             </b-col>
           </b-row>
 
-          <b-button variant="warning">Actualizar</b-button>
+          <b-button variant="warning" @click="updateCityDB">Actualizar</b-button>
           <b-button variant="primary" v-b-modal="modalId">Historial de visitantes</b-button>
-          <b-button variant="danger">Borrar</b-button>
+          <b-button variant="danger" @click="deleteCityDB">Borrar</b-button>
         </b-container>
       </b-form>
     </b-card>
@@ -58,16 +58,44 @@
 </template>
 
 <script>
+import CityDAO from "./../../../DataAccessObjects/CityDAO";
+
 export default {
   name: "City",
   data() {
-    return { tourists: ["Gonzalo", "Dennis"] };
+    return {
+      response: "",
+      tourists: ["Gonzalo", "Dennis"],
+    };
   },
   props: {
     city: {
       type: Object,
     },
     modalId: String,
+    cities: [],
+    getCitiesDB: Function,
+  },
+  methods: {
+    getCityDB() {
+      var data;
+      CityDAO.getCity(this.city.pkCity, (data) => {
+        console.log(data);
+        this.cities = data;
+      });
+    },
+    updateCityDB() {
+      CityDAO.updateCity(this.city, (response) => {
+        this.response = response;
+        this.getCitiesDB();
+      });
+    },
+    deleteCityDB() {
+      CityDAO.deleteCity(this.city.pkCity, (response) => {
+        this.response = response;
+        this.getCitiesDB();
+      });
+    },
   },
 };
 </script>

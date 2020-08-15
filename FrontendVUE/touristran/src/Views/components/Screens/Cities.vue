@@ -2,7 +2,7 @@
   <div>
     <b-button variant="success" class="m-3 b-floating" v-b-modal.modal-2>Agregar ciudad</b-button>
     <div v-for="(city, index) in cities" :key="city.pkCity">
-      <City :city="city" :modalId="index.toString()"></City>
+      <City :city="city" :getCitiesDB="getCitiesDB" :modalId="index.toString()"></City>
     </div>
     <b-modal id="modal-2" title="Agregar ciudad" :hide-footer="true">
       <b-form>

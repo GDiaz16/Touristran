@@ -2,7 +2,7 @@
   <div>
     <b-button variant="success" class="m-3 b-floating" v-b-modal.modal-1>Agregar turista</b-button>
     <div v-for="(tourist, index) in tourists" :key="tourist.pkTourist">
-      <Tourist :tourist="tourist" :modalId="'t-'+index.toString()"></Tourist>
+      <Tourist :tourist="tourist" :modalId="'t-'+index.toString()" :getTouristsDB="getTouristsDB"></Tourist>
     </div>
     <b-modal id="modal-1" title="Agregar turista" size="xl" :hide-footer="true">
       <b-form>
@@ -61,7 +61,7 @@
               </b-form-group>
             </b-col>
           </b-row>
-          <b-button variant="success">Guardar</b-button>
+          <b-button variant="success" @click="createTouristDB">Guardar</b-button>
         </b-container>
       </b-form>
     </b-modal>
@@ -70,7 +70,7 @@
 
 <script>
 import Tourist from "./../Elements/Tourist";
-import TouristDAO from './../../../DataAccessObjects/TouristDAO'
+import TouristDAO from "./../../../DataAccessObjects/TouristDAO";
 export default {
   name: "Tourists",
   components: {
@@ -78,6 +78,7 @@ export default {
   },
   data() {
     return {
+      response: "",
       typesOfIdentity: [
         { value: "CÉDULA DE CIUDADANIA", text: "CÉDULA DE CIUDADANIA" },
         { value: "CÉDULA DE EXTRANJERÍA", text: "CÉDULA DE EXTRANJERÍA" },
@@ -146,20 +147,24 @@ export default {
     };
   },
   methods: {
-    getTouristsDB () {
+    getTouristsDB() {
       var data;
-      TouristDAO.getTourists((data)=>{
-        console.log(data)
+      TouristDAO.getTourists((data) => {
+        console.log(data);
         this.tourists = data;
-
+      });
+    },
+    createTouristDB() {
+      this.newTourist.cityModel.pkCity = this.newTourist.fkCity;
+      TouristDAO.createTourist(this.newTourist, (response) => {
+        this.response = response;
+        this.getTouristsDB();
       });
     },
   },
-  beforeMount(){
+  beforeMount() {
     this.getTouristsDB();
-  }
-
-
+  },
 };
 </script>
 

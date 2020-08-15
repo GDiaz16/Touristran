@@ -29,7 +29,7 @@
                 label-for="input-1"
                 class
               >
-                <b-form-input v-model="tourist.idType"></b-form-input>
+                <b-form-select v-model="tourist.idType" :options="typesOfIdentity"></b-form-select>
               </b-form-group>
             </b-col>
             <b-col>
@@ -51,7 +51,7 @@
             </b-col>
             <b-col>
               <b-form-group id="fieldset-1" label="Destino" label-for="input-1" class>
-                <b-form-input v-model="tourist.pkTourist"></b-form-input>
+                <b-form-select v-model="tourist.fkCity" :options="citiesOption"></b-form-select>
               </b-form-group>
             </b-col>
             <b-col>
@@ -63,9 +63,9 @@
               </b-form-group>
             </b-col>
           </b-row>
-          <b-button variant="primary">Actualizar</b-button>
+          <b-button variant="primary" @click="updateTouristDB">Actualizar</b-button>
           <b-button variant="warning" v-b-modal="modalId">Ciudades visitadas</b-button>
-          <b-button variant="danger">Borrar</b-button>
+          <b-button variant="danger" @click="deleteTouristDB">Borrar</b-button>
         </b-container>
       </b-form>
     </b-card>
@@ -86,13 +86,22 @@
 </template>
 
 <script>
-
+import TouristDAO from "./../../../DataAccessObjects/TouristDAO";
+import CityDAO from "./../../../DataAccessObjects/CityDAO";
 
 export default {
   name: "Tourist",
   data() {
     return {
-      
+      response: "",
+      citiesOption: [],
+      typesOfIdentity: [
+        { value: "CÉDULA DE CIUDADANIA", text: "CÉDULA DE CIUDADANIA" },
+        { value: "CÉDULA DE EXTRANJERÍA", text: "CÉDULA DE EXTRANJERÍA" },
+        { value: "PASAPORTE", text: "PASAPORTE" },
+        { value: "REGISTRO CIVIL", text: "REGISTRO CIVIL" },
+        { value: "TARJETA DE IDENTIDAD", text: "TARJETA DE IDENTIDAD" },
+      ],
     };
   },
   props: {
@@ -100,7 +109,41 @@ export default {
       type: Object,
     },
     modalId: String,
-    cities: []
+    cities: [],
+    getTouristsDB: Function,
+  },
+  methods: {
+    getTouristDB() {
+      var data;
+      TouristDAO.getTourists(this.tourist.pkTourist, (data) => {
+        console.log(data);
+        this.tourists = data;
+      });
+    },
+    updateTouristDB() {
+      this.tourist.cityModel.pkCity = this.tourist.fkCity;
+      TouristDAO.updateTourist(this.tourist, (response) => {
+        this.response = response;
+        this.getTouristsDB();
+      });
+    },
+    deleteTouristDB() {
+      TouristDAO.deleteTourist(this.tourist.pkTourist, (response) => {
+        this.response = response;
+        this.getTouristsDB();
+      });
+    },
+    getCitiesDB() {
+      var data;
+      CityDAO.getCities((data) => {
+        console.log(data);
+        var citiesAux = [];
+        data.forEach((element) => {
+          citiesAux.push({ value: element.pCity, text: element.name });
+        });
+        this.citiesOption = citiesAux;
+      });
+    },
   },
 };
 </script>

@@ -39,11 +39,11 @@ public class CityModel {
 
     private String mostRelevantHotel;
 
-    @OneToMany(mappedBy = "fkCity", orphanRemoval = true)
+    @OneToMany(mappedBy = "fkCity", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore
     private List<BookingModel> bookingModelSet;
 
-    @OneToMany(mappedBy = "fkCity", orphanRemoval = true)
+    @OneToMany(mappedBy = "fkCity", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore
     private List<TouristModel> touristModels;
 }
