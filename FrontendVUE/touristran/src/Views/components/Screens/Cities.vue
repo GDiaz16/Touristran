@@ -1,6 +1,13 @@
 <template>
   <div>
-    <b-button variant="success" class="m-3 b-floating" v-b-modal.modal-2>Agregar ciudad</b-button>
+    <b-button
+      @click="getCitiesFromApi"
+      variant="success"
+      class="m-3 b-floating"
+      v-b-modal.modal-2
+    >Agregar ciudad</b-button>
+    <b-button variant="warning" class="m-3 b-floating-2" @click="getCitiesDB">Actualizar lista</b-button>
+
     <div v-for="(city, index) in cities" :key="city.pkCity">
       <City :city="city" :getCitiesDB="getCitiesDB" :modalId="index.toString()"></City>
     </div>
@@ -10,14 +17,12 @@
           <b-row>
             <b-col>
               <b-form-group id="fieldset-1" label="Elija la ciudad" label-for="input-1" class>
-                <b-form-select
-                  v-model="apiCity.pkCity"
-                  :options="[{value:1, text:'Bogotá'},{value:1,text:'Medellin'}]"
-                ></b-form-select>
+                <b-form-select v-model="apiCity" :options="citiesApi"></b-form-select>
               </b-form-group>
             </b-col>
           </b-row>
-          <b-button variant="success">Asignar</b-button>
+          <b-button @click="createCityDB" variant="success">Asignar</b-button>
+          <p class="success">{{response}}</p>
         </b-container>
       </b-form>
     </b-modal>
@@ -41,6 +46,7 @@ export default {
   },
   data() {
     return {
+      response: "",
       apiCity: {
         pkCity: 0,
         name: "",
@@ -48,6 +54,7 @@ export default {
         mostTouristicPlace: "",
         mostRelevantHotel: "",
       },
+      citiesApi: [],
       cities: [] /* [
         {
           pkCity: 1,
@@ -75,10 +82,15 @@ export default {
   },
   methods: {
     getCitiesFromApi() {
+      this.response = "";
       var data;
       getApiCities((data) => {
+        var citiesAux = [];
         console.log(data);
-        this.cities = data;
+        data.forEach((element) => {
+          citiesAux.push({ value: element, text: element.name });
+        });
+        this.citiesApi = citiesAux;
       });
     },
     getCitiesDB() {
@@ -86,6 +98,12 @@ export default {
       CityDAO.getCities((data) => {
         console.log(data);
         this.cities = data;
+      });
+    },
+    createCityDB() {
+      CityDAO.createCity(this.apiCity, (response) => {
+        this.response = "Ciudad agregada a la lista!";
+        this.getCitiesDB();
       });
     },
   },

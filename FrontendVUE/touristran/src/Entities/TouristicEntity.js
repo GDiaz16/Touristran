@@ -1,7 +1,7 @@
 class TouristEntity {
   constructor(
     pkTourist,
-    fkCity,
+    city,
     name,
     birthday,
     idOfTourist,
@@ -11,7 +11,7 @@ class TouristEntity {
     hasCreditCard
   ) {
     this.pkTourist = pkTourist;
-    this.fkCity = fkCity;
+    this.city = city;
     this.name = name;
     this.birthday = birthday;
     this.idOfTourist = idOfTourist;
@@ -29,12 +29,12 @@ class TouristEntity {
     this.pkTourist = pkTourist;
   }
 
-  getFkCity() {
-    return this.fkCity;
+  getCity() {
+    return this.city;
   }
 
-  setFkCity(fkCity) {
-    this.fkCity = fkCity;
+  setCity(city) {
+    this.city = city;
   }
 
   getName() {

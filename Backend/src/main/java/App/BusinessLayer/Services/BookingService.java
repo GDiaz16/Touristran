@@ -14,30 +14,31 @@ import java.util.List;
 
 @Service
 public class BookingService {
+
     @Autowired
     private BookingRepository bookingRepository;
 
-    public List<BookingModel> findAll(){
+    public List<BookingModel> findAll() {
         return (List<BookingModel>) bookingRepository.findAll();
     }
 
-    public BookingModel findById(int id){
+    public BookingModel findById(int id) {
         return bookingRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public List <BookingModel> findByfkTourist( TouristModel touristModel){
-        return bookingRepository.findByfkTouristEquals(touristModel);
+    public List<BookingModel> findByfkTourist(int id) {
+        return bookingRepository.findByfkTouristEquals(id);
     }
 
-    public List <BookingModel> findByfkCity( CityModel cityModel){
-        return bookingRepository.findByfkCityEquals(cityModel);
+    public List<BookingModel> findByfkCity(int id) {
+        return bookingRepository.findByfkCityEquals(id);
     }
 
-    public BookingModel save(BookingModel bookingModel){
+    public BookingModel save(BookingModel bookingModel) {
         return bookingRepository.save(bookingModel);
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         bookingRepository.deleteById(id);
     }
 }

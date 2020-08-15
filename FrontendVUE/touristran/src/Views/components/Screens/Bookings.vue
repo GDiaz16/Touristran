@@ -6,10 +6,12 @@
       class="m-3 b-floating"
       v-b-modal.modal-3
     >Hacer reservación</b-button>
+    <b-button variant="info" class="m-3 b-floating-3" @click="getBookingDB">Actualizar lista</b-button>
+
     <div v-for="booking in bookings" :key="booking.pkBooking">
       <Booking :booking="booking"></Booking>
     </div>
-    <b-modal id="modal-3" title="Agregar ciudad" size="xl" :hide-footer="true">
+    <b-modal id="modal-3" title="Hacer reservación" size="xl" :hide-footer="true">
       <b-form>
         <b-container>
           <b-row>
@@ -31,6 +33,7 @@
           </b-row>
 
           <b-button variant="success" @click="createBookingDB">Crear reservación</b-button>
+          <p class="success">{{response}}</p>
         </b-container>
       </b-form>
     </b-modal>
@@ -100,12 +103,13 @@ export default {
         console.log(data);
         var citiesAux = [];
         data.forEach((element) => {
-          citiesAux.push({ value: element.pCity, text: element.name });
+          citiesAux.push({ value: element.pkCity, text: element.name });
         });
         this.cities = citiesAux;
       });
     },
     getData() {
+      this.response = "";
       this.getCitiesDB();
       this.getTouristsDB();
     },
@@ -120,7 +124,7 @@ export default {
       this.newBooking.cityModel.pkCity = this.newBooking.fkCity;
       this.newBooking.touristModel.pkTourist = this.newBooking.fkTourist;
       BookingDAO.createBooking(this.newBooking, (response) => {
-        this.response = response;
+        this.response = "Reservación hecha!";
         this.getBookingDB();
       });
     },
@@ -132,4 +136,10 @@ export default {
 </script>
 
 <style>
+.b-floating-3 {
+  position: fixed;
+  top: -15px;
+  right: 170px;
+  z-index: 10;
+}
 </style>

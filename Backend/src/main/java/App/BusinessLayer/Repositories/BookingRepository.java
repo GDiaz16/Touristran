@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface BookingRepository  extends CrudRepository<BookingModel, Integer> {
-    List<BookingModel> findByfkTouristEquals(TouristModel touristModel);
-    List<BookingModel> findByfkCityEquals(CityModel cityModel);
+    List<BookingModel> findByfkTouristEquals(int touristID);
+    List<BookingModel> findByfkCityEquals(int cityID);
 }

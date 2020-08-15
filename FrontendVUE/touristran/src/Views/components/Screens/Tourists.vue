@@ -1,6 +1,13 @@
 <template>
   <div>
-    <b-button variant="success" class="m-3 b-floating" v-b-modal.modal-1>Agregar turista</b-button>
+    <b-button
+      variant="success"
+      class="m-3 b-floating"
+      v-b-modal.modal-1
+      @click="getCitiesDB"
+    >Agregar turista</b-button>
+    <b-button variant="primary" class="m-3 b-floating-2" @click="getTouristsDB">Actualizar lista</b-button>
+
     <div v-for="(tourist, index) in tourists" :key="tourist.pkTourist">
       <Tourist :tourist="tourist" :modalId="'t-'+index.toString()" :getTouristsDB="getTouristsDB"></Tourist>
     </div>
@@ -49,7 +56,7 @@
             </b-col>
             <b-col>
               <b-form-group id="fieldset-1" label="Destino" label-for="input-1" class>
-                <b-form-input v-model="newTourist.fkCity"></b-form-input>
+                <b-form-select v-model="newTourist.city" :options="citiesOptionCom"></b-form-select>
               </b-form-group>
             </b-col>
             <b-col>
@@ -62,6 +69,7 @@
             </b-col>
           </b-row>
           <b-button variant="success" @click="createTouristDB">Guardar</b-button>
+          <p class="success">{{response}}</p>
         </b-container>
       </b-form>
     </b-modal>
@@ -71,6 +79,8 @@
 <script>
 import Tourist from "./../Elements/Tourist";
 import TouristDAO from "./../../../DataAccessObjects/TouristDAO";
+import CityDAO from "./../../../DataAccessObjects/CityDAO";
+
 export default {
   name: "Tourists",
   components: {
@@ -79,6 +89,7 @@ export default {
   data() {
     return {
       response: "",
+      citiesOption: [],
       typesOfIdentity: [
         { value: "CÉDULA DE CIUDADANIA", text: "CÉDULA DE CIUDADANIA" },
         { value: "CÉDULA DE EXTRANJERÍA", text: "CÉDULA DE EXTRANJERÍA" },
@@ -87,10 +98,7 @@ export default {
         { value: "TARJETA DE IDENTIDAD", text: "TARJETA DE IDENTIDAD" },
       ],
       newTourist: {
-        fkCity: 1,
-        cityModel: {
-          pkCity: 1,
-        },
+        city: 1,
         name: "",
         birthday: "",
         idOfTourist: "",
@@ -155,11 +163,27 @@ export default {
       });
     },
     createTouristDB() {
-      this.newTourist.cityModel.pkCity = this.newTourist.fkCity;
       TouristDAO.createTourist(this.newTourist, (response) => {
-        this.response = response;
+        this.response = "Creado!";
         this.getTouristsDB();
       });
+    },
+    getCitiesDB(callback) {
+      this.response = "";
+      var data;
+      CityDAO.getCities((data) => {
+        console.log(data);
+        var citiesAux = [];
+        data.forEach((element) => {
+          citiesAux.push({ value: element.name, text: element.name });
+        });
+        this.citiesOption = citiesAux;
+      });
+    },
+  },
+  computed: {
+    citiesOptionCom: function () {
+      return this.citiesOption;
     },
   },
   beforeMount() {
@@ -174,5 +198,15 @@ export default {
   top: -15px;
   right: 8px;
   z-index: 10;
+}
+.b-floating-2 {
+  position: fixed;
+  top: -15px;
+  right: 150px;
+  z-index: 10;
+}
+
+.success {
+  color: rgb(89, 177, 38);
 }
 </style>

@@ -51,7 +51,7 @@
             </b-col>
             <b-col>
               <b-form-group id="fieldset-1" label="Destino" label-for="input-1" class>
-                <b-form-select v-model="tourist.fkCity" :options="citiesOption"></b-form-select>
+                <b-form-select v-model="tourist.city" :options="citiesOptionCom"></b-form-select>
               </b-form-group>
             </b-col>
             <b-col>
@@ -121,10 +121,10 @@ export default {
       });
     },
     updateTouristDB() {
-      this.tourist.cityModel.pkCity = this.tourist.fkCity;
+      this.getCitiesDB();
       TouristDAO.updateTourist(this.tourist, (response) => {
         this.response = response;
-        this.getTouristsDB();
+        //this.getTouristsDB();
       });
     },
     deleteTouristDB() {
@@ -133,17 +133,25 @@ export default {
         this.getTouristsDB();
       });
     },
-    getCitiesDB() {
+    getCitiesDB(callback) {
       var data;
       CityDAO.getCities((data) => {
         console.log(data);
         var citiesAux = [];
         data.forEach((element) => {
-          citiesAux.push({ value: element.pCity, text: element.name });
+          citiesAux.push({ value: element.name, text: element.name });
         });
         this.citiesOption = citiesAux;
       });
     },
+  },
+  computed: {
+    citiesOptionCom: function () {
+      return this.citiesOption;
+    },
+  },
+  beforeMount() {
+    this.getCitiesDB();
   },
 };
 </script>

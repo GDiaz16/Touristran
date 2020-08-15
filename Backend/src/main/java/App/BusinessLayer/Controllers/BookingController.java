@@ -16,73 +16,74 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/booking")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class BookingController {
+
     @Autowired
     private BookingService bookingService;
 
     @GetMapping
-    public List<BookingModel> findAll(){
+    public List<BookingModel> findAll() {
         return bookingService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookingModel> findById(@PathVariable int id){
+    public ResponseEntity<BookingModel> findById(@PathVariable int id) {
         try {
             return ResponseEntity.ok(bookingService.findById(id));
-        }catch (  JsonParseException e){
+        } catch (JsonParseException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
         }
 
     }
 
-    @GetMapping("/user")
-    public List<BookingModel> findByfkTourist(@RequestBody TouristModel touristModel){
-        return bookingService.findByfkTourist(touristModel);
+    @GetMapping("/tourist/{id}")
+    public List<BookingModel> findByfkTourist(@PathVariable int id) {
+        return bookingService.findByfkTourist(id);
     }
 
-    @GetMapping("/city")
-    public List<BookingModel> findByfkTourist(@RequestBody CityModel cityModel){
-        return bookingService.findByfkCity(cityModel);
+    @GetMapping("/city/{id}")
+    public List<BookingModel> findByfkCity(@PathVariable int id) {
+        return bookingService.findByfkCity(id);
     }
 
     @PostMapping
-    public ResponseEntity<BookingModel> create(@RequestBody BookingModel bookingModel){
+    public ResponseEntity<BookingModel> create(@RequestBody BookingModel bookingModel) {
 
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookingModel> update(@RequestBody BookingModel bookingModel){
+    public ResponseEntity<BookingModel> update(@RequestBody BookingModel bookingModel) {
         try {
-            BookingModel bookingModel1 =
-                    bookingService.findById(bookingModel.getPkBooking());
+            BookingModel bookingModel1
+                    = bookingService.findById(bookingModel.getPkBooking());
             return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingModel));
 
-        }catch (JsonParseException e){
+        } catch (JsonParseException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BookingModel> deleteById(@PathVariable int id){
+    public ResponseEntity<BookingModel> deleteById(@PathVariable int id) {
 
         try {
             bookingService.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body(null);
-        }catch (EmptyResultDataAccessException e ){
+        } catch (EmptyResultDataAccessException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }catch (JsonParseException e){
+        } catch (JsonParseException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 

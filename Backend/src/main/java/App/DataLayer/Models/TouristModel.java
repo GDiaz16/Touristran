@@ -24,11 +24,11 @@ public class TouristModel {
     public TouristModel() {
     }
 
-    public TouristModel(CityModel cityModel, Long fkCity, String name, LocalDate birthday, String idOfTourist,
+    public TouristModel(/*CityModel cityModel, Long fkCity,*/String city, String name, LocalDate birthday, String idOfTourist,
             String idType, int travelFrequencyInMonths,
             double budget, boolean hasCreditCard) {
-        this.cityModel = cityModel;
-        this.fkCity = fkCity;
+//        this.cityModel = cityModel;
+//        this.fkCity = fkCity;
         this.name = name;
         this.birthday = birthday;
         this.idOfTourist = idOfTourist;
@@ -36,19 +36,20 @@ public class TouristModel {
         this.travelFrequencyInMonths = travelFrequencyInMonths;
         this.budget = budget;
         this.hasCreditCard = hasCreditCard;
+        this.city = city;
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkTourist;
 
-    @ManyToOne(targetEntity = CityModel.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "pkCity", nullable = true)
-    private CityModel cityModel;
-
-    @Column(name = "pkCity", insertable = false, updatable = false)
-    private Long fkCity;
+//    @ManyToOne(targetEntity = CityModel.class, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "pkCity", nullable = true)
+//    private CityModel cityModel;
+//
+//    @Column(name = "pkCity", insertable = false, updatable = false)
+//    private Long fkCity;
+    private String city;
 
     private String name;
 

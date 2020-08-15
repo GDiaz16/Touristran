@@ -43,7 +43,7 @@ public class CityModel {
     @JsonIgnore
     private List<BookingModel> bookingModelSet;
 
-    @OneToMany(mappedBy = "fkCity", cascade = CascadeType.ALL, orphanRemoval = false)
-    @JsonIgnore
-    private List<TouristModel> touristModels;
+//    @OneToMany(mappedBy = "fkCity", cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JsonIgnore
+//    private List<TouristModel> touristModels;
 }
