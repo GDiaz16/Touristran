@@ -21,20 +21,20 @@ public class Tourists extends javax.swing.JPanel {
         this.setSize(400, 200);
         this.touristEntity = touristEntity;
         // Datos iniciales
-        this.jTextField2.setText(this.touristEntity.getName());
-        this.jTextField3.setText(this.touristEntity.getIdOfTourist());
-        this.jTextField4.setText(this.touristEntity.getName());
-
-        this.jTextField4.setText(this.touristEntity.getName());
-        this.jTextField5.setText(this.touristEntity.getBirthday().toString());
-        this.jTextField6.setText(this.touristEntity.getIdOfTourist());
-        this.jTextField7.setText(String.valueOf(this.touristEntity.getTravelFrequencyInMonths()));
-        this.jTextField1.setText(String.valueOf(this.touristEntity.getBudget()));
-
-        this.jComboBox1.setSelectedItem(this.touristEntity.getIdType());
-        this.jComboBox2.setSelectedItem((this.touristEntity.hasCreditCard()) ? "SI" : "NO");
-        String city = (new CityDAO()).getCity(touristEntity.getFkCity()).getName();
-        this.jComboBox3.setSelectedItem(city);
+//        this.jTextField2.setText(this.touristEntity.getName());
+//        this.jTextField3.setText(this.touristEntity.getIdOfTourist());
+//        this.jTextField4.setText(this.touristEntity.getName());
+//
+//        this.jTextField4.setText(this.touristEntity.getName());
+//        this.jTextField5.setText(this.touristEntity.getBirthday().toString());
+//        this.jTextField6.setText(this.touristEntity.getIdOfTourist());
+//        this.jTextField7.setText(String.valueOf(this.touristEntity.getTravelFrequencyInMonths()));
+//        this.jTextField1.setText(String.valueOf(this.touristEntity.getBudget()));
+//
+//        this.jComboBox1.setSelectedItem(this.touristEntity.getIdType());
+//        this.jComboBox2.setSelectedItem((this.touristEntity.hasCreditCard()) ? "SI" : "NO");
+//        String city = (new CityDAO()).getCity(touristEntity.getFkCity()).getName();
+//        this.jComboBox3.setSelectedItem(city);
 
     }
 

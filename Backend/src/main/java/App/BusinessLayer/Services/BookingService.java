@@ -4,7 +4,6 @@ import App.BusinessLayer.Repositories.BookingRepository;
 import App.BusinessLayer.Repositories.BookingRepository;
 import App.DataLayer.Models.BookingModel;
 import App.DataLayer.Models.CityModel;
-import App.DataLayer.Models.ToDo;
 import App.DataLayer.Models.TouristModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

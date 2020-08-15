@@ -1,7 +1,6 @@
 package App.BusinessLayer.Services;
 
 import App.BusinessLayer.Repositories.TouristRepository;
-import App.DataLayer.Models.ToDo;
 import App.DataLayer.Models.TouristModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -17,12 +17,14 @@ import java.util.List;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "pkTourist")
 public class TouristModel {
+
     public TouristModel() {
     }
 
-    public TouristModel(CityModel fkCity, String name, Date birthday, String idOfTourist,
-                        String idType, int travelFrequencyInMonths,
-                        double budget, boolean hasCreditCard) {
+    public TouristModel(CityModel cityModel, Long fkCity, String name, Date birthday, String idOfTourist,
+            String idType, int travelFrequencyInMonths,
+            double budget, boolean hasCreditCard) {
+        this.cityModel =cityModel;
         this.fkCity = fkCity;
         this.name = name;
         this.birthday = birthday;
@@ -37,10 +39,13 @@ public class TouristModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkTourist;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = CityModel.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "pkCity", nullable = true)
-    private CityModel fkCity;
+    private CityModel cityModel;
 
+    @Column(name="pkCity",insertable = false, updatable = false)
+    private Long fkCity;
+    
     private String name;
 
     private Date birthday;

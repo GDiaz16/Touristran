@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/web-api/cities")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
 public class CityController {
     @Autowired
     private CityService cityService;

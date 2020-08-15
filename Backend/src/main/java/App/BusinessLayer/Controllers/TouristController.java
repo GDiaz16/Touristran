@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tourists")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class TouristController {
     @Autowired
     private TouristService touristService;
@@ -22,7 +23,6 @@ public class TouristController {
     public List<TouristModel> findAll(){
         return touristService.findAll();
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<TouristModel> findById(@PathVariable int id){
         try {

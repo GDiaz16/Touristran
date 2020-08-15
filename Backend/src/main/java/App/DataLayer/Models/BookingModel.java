@@ -16,10 +16,12 @@ import java.sql.Date;
 public class BookingModel {
     public BookingModel() {}
 
-    public BookingModel(TouristModel fkTourist, CityModel fkCity, Date date) {
+    public BookingModel(CityModel cityModel,TouristModel touristModel, int fkCity, int fkTourist, Date date) {
         this.fkTourist = fkTourist;
         this.fkCity = fkCity;
         this.date = date;
+        this.cityModel = cityModel;
+        this.touristModel = touristModel;
     }
 
 
@@ -27,13 +29,19 @@ public class BookingModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkBooking;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = TouristModel.class, fetch=FetchType.EAGER)
     @JoinColumn(name = "pkTourist", nullable = true)
-    private TouristModel fkTourist;
+    private TouristModel touristModel;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = CityModel.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "pkCity", nullable = true)
-    private CityModel fkCity;
+    private CityModel cityModel;
 
+    @Column(name="pkTourist", updatable=false, insertable=false)
+    private int fkTourist;
+    
+    @Column(name="pkCity", updatable=false, insertable=false)
+    private int fkCity;
+    
     private Date date;
 }
