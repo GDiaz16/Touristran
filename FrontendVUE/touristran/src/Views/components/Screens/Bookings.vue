@@ -34,6 +34,8 @@
 
 <script>
 import Booking from "./../Elements/Booking";
+import BookingDAO from './../../../DataAccessObjects/BookingDAO'
+
 export default {
   name: "Bookings",
   components: {
@@ -53,7 +55,7 @@ export default {
         fkCity: 1,
         date: "",
       },
-      bookings: [
+      bookings: []/* [
         {
           pkBooking: 1,
           touristModel: {
@@ -90,9 +92,22 @@ export default {
           fkCity: 1,
           date: "2020-10-04",
         },
-      ],
+      ] */,
     };
   },
+    methods: {
+    getBookingDB () {
+      var data;
+      BookingDAO.getBookings((data)=>{
+        console.log(data)
+        this.bookings = data;
+
+      });
+    },
+  },
+  beforeMount(){
+    this.getBookingDB();
+  }
 };
 </script>
 

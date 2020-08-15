@@ -26,7 +26,8 @@
 
 <script>
 import City from "./../Elements/City";
-
+import getApiCities from "../../../DataAccessObjects/WebServiceDAO";
+import CityDAO from "./../../../DataAccessObjects/CityDAO";
 export default {
   name: "Cities",
   props: {
@@ -47,7 +48,7 @@ export default {
         mostTouristicPlace: "",
         mostRelevantHotel: "",
       },
-      cities: [
+      cities: [] /* [
         {
           pkCity: 1,
           name: "Bogotá",
@@ -69,8 +70,27 @@ export default {
           mostTouristicPlace: "Plaza de toros",
           mostRelevantHotel: "Hotel Sucursal",
         },
-      ],
+      ], */,
     };
+  },
+  methods: {
+    getCitiesFromApi() {
+      var data;
+      getApiCities((data) => {
+        console.log(data);
+        this.cities = data;
+      });
+    },
+    getCitiesDB() {
+      var data;
+      CityDAO.getCities((data) => {
+        console.log(data);
+        this.cities = data;
+      });
+    },
+  },
+  beforeMount() {
+    this.getCitiesDB();
   },
 };
 </script>

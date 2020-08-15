@@ -5,9 +5,7 @@
 </template>
 
 <script>
-import TouristDAO from "./DataAccessObjects/TouristDAO";
 import Home from "./Views/components/Home";
-console.log("tag", TouristDAO());
 
 export default {
   name: "app",
@@ -16,7 +14,6 @@ export default {
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
     };
   },
 };

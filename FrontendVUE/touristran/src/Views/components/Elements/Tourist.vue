@@ -86,11 +86,13 @@
 </template>
 
 <script>
+
+
 export default {
   name: "Tourist",
   data() {
     return {
-      cities: ["Bogotá", "Peru"],
+      
     };
   },
   props: {
@@ -98,6 +100,7 @@ export default {
       type: Object,
     },
     modalId: String,
+    cities: []
   },
 };
 </script>

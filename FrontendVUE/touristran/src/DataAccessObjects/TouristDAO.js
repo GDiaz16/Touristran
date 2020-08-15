@@ -1,13 +1,13 @@
 const axios = require("axios");
 
-function getTourist() {
-  axios.get("http://localhost:8080/api/booking/").then((response) => {
-    console.log(response);
+function getTourists(callback) {
+  axios.get("http://localhost:8080/api/tourists").then((response) => {
+    //console.log(response);
+    callback(response.data);
   }).catch(function(error){
     console.log(error)
   }); 
-  //console.log('tag', 'Hola mundo')
   
 }
 
-export default getTourist;
+export default {getTourists};

@@ -1,9 +1,11 @@
 package App.DataLayer.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.time.LocalDate;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,7 +23,7 @@ public class TouristModel {
     public TouristModel() {
     }
 
-    public TouristModel(CityModel cityModel, Long fkCity, String name, Date birthday, String idOfTourist,
+    public TouristModel(CityModel cityModel, Long fkCity, String name, LocalDate birthday, String idOfTourist,
             String idType, int travelFrequencyInMonths,
             double budget, boolean hasCreditCard) {
         this.cityModel =cityModel;
@@ -47,8 +49,9 @@ public class TouristModel {
     private Long fkCity;
     
     private String name;
-
-    private Date birthday;
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate birthday;
 
     private String idOfTourist;
 

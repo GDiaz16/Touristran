@@ -1,13 +1,18 @@
 <template>
   <div>
-      <div>
-  <b-tabs content-class="mt-3">
-    <b-tab title="Turistas" active><Tourists></Tourists></b-tab>
-    <b-tab title="Ciudades"><Cities></Cities></b-tab>
-    <b-tab title="Historial de reservaciones" > <Bookings></Bookings></b-tab>
-  </b-tabs>
-</div>
-
+    <div>
+      <b-tabs content-class="mt-3">
+        <b-tab title="Turistas" active>
+          <Tourists></Tourists>
+        </b-tab>
+        <b-tab title="Ciudades">
+          <Cities></Cities>
+        </b-tab>
+        <b-tab title="Historial de reservaciones">
+          <Bookings></Bookings>
+        </b-tab>
+      </b-tabs>
+    </div>
   </div>
 </template>
 

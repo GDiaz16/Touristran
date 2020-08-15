@@ -27,10 +27,7 @@
                 label-for="input-1"
                 class
               >
-                <b-form-select
-                  v-model="newTourist.idType"
-                  :options="typesOfIdentity"
-                ></b-form-select>
+                <b-form-select v-model="newTourist.idType" :options="typesOfIdentity"></b-form-select>
               </b-form-group>
             </b-col>
             <b-col>
@@ -73,6 +70,7 @@
 
 <script>
 import Tourist from "./../Elements/Tourist";
+import TouristDAO from './../../../DataAccessObjects/TouristDAO'
 export default {
   name: "Tourists",
   components: {
@@ -147,6 +145,21 @@ export default {
       ],
     };
   },
+  methods: {
+    getTouristsDB () {
+      var data;
+      TouristDAO.getTourists((data)=>{
+        console.log(data)
+        this.tourists = data;
+
+      });
+    },
+  },
+  beforeMount(){
+    this.getTouristsDB();
+  }
+
+
 };
 </script>
 
