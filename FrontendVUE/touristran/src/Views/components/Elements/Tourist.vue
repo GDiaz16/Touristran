@@ -159,10 +159,10 @@ export default {
         data.forEach((element) => {
           CityDAO.getCity(element.fkCity, (data) => {
             bookingList.push(data.name);
+            this.citiesVisited = Array.from(new Set(bookingList));
           });
         });
       });
-      this.citiesVisited = bookingList;
     },
   },
   computed: {
