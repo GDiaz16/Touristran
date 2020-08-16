@@ -9,9 +9,9 @@
  * Crear una base de datos postgres de nombre **cities-api-db** para el Web Service
  * Crear una base de datos postgres de nombre **touristran-db** para el Backend
  * El usuario para las bases de datos debe ser **postgres**
+  * La contraseña debe ser **admin**
  * Correr el archivo **TouristranApplication.java** en **Touristran\TouristranBackend\src\App** para el backend
  * Correr el archivo **CitiesWebService.java** en **Touristran\TouristranWebService\src\App** para el Web Service
- * La contraseña debe ser **admin**
  * Abrir una consola de comandos en la ruta **Touristran\FrontendVUE\touristran** y correr los siguientes comandos para ejecutar el Frontend en el navegador web
  > npm install \
  > npm run dev
