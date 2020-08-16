@@ -107,51 +107,7 @@ export default {
         budget: 0,
         hasCreditCard: false,
       },
-      tourists: [
-        {
-          pkTourist: 1,
-
-          fkCity: 1,
-          cityModel: {
-            pkCity: 1,
-          },
-          name: "Pedro Diaz",
-          birthday: "1998-05-07",
-          idOfTourist: "123456",
-          idType: "CC",
-          travelFrequencyInMonths: 2,
-          budget: 1000000.0,
-          hasCreditCard: false,
-        },
-        {
-          pkTourist: 2,
-          fkCity: 1,
-          cityModel: {
-            pkCity: 1,
-          },
-          name: "Gonzalo Diaz Muñoz",
-          birthday: "1998-05-07",
-          idOfTourist: "78965461",
-          idType: "CC",
-          travelFrequencyInMonths: 2,
-          budget: 1000000.0,
-          hasCreditCard: true,
-        },
-        {
-          pkTourist: 3,
-          fkCity: 1,
-          cityModel: {
-            pkCity: 1,
-          },
-          name: "Maria Hernandez",
-          birthday: "1998-05-07",
-          idOfTourist: "3135468",
-          idType: "CC",
-          travelFrequencyInMonths: 2,
-          budget: 1000000.0,
-          hasCreditCard: false,
-        },
-      ],
+      tourists: [],
     };
   },
   methods: {

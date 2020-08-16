@@ -33,7 +33,7 @@
           </b-row>
 
           <b-button variant="success" @click="createBookingDB">Crear reservación</b-button>
-          <p class="success">{{response}}</p>
+          <p :class="success">{{responseText}}</p>
         </b-container>
       </b-form>
     </b-modal>
@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       response: "",
+      datesOfCity: [],
       tourists: [],
       cities: [],
       newBooking: {
@@ -121,12 +122,44 @@ export default {
       });
     },
     createBookingDB() {
-      this.newBooking.cityModel.pkCity = this.newBooking.fkCity;
-      this.newBooking.touristModel.pkTourist = this.newBooking.fkTourist;
-      BookingDAO.createBooking(this.newBooking, (response) => {
-        this.response = "Reservación hecha!";
-        this.getBookingDB();
+      this.getDateList(() => {
+        if (this.datesOfCity.length < 5) {
+          this.newBooking.cityModel.pkCity = this.newBooking.fkCity;
+          this.newBooking.touristModel.pkTourist = this.newBooking.fkTourist;
+          BookingDAO.createBooking(this.newBooking, (response) => {
+            this.response = "Reservación hecha!";
+            this.getBookingDB();
+          });
+        } else {
+          this.response = "No se pueden hacer más reservaciones este día";
+        }
       });
+    },
+    getDateList(callback) {
+      var bookingList = [];
+      BookingDAO.getBookingByCity(this.newBooking.fkCity, (data) => {
+        data.forEach((element) => {
+          if (this.newBooking.date == element.date) {
+            bookingList.push(element.date);
+          }
+        });
+
+        callback();
+      });
+      this.datesOfCity = bookingList;
+    },
+  },
+  computed: {
+    success: function () {
+      if (this.datesOfCity.length < 5) {
+        return "success";
+      } else {
+        return "failed";
+      }
+    },
+
+    responseText: function () {
+      return this.response;
     },
   },
   beforeMount() {
@@ -141,5 +174,9 @@ export default {
   top: -15px;
   right: 170px;
   z-index: 10;
+}
+
+.failed {
+  color: rgb(241, 28, 28);
 }
 </style>

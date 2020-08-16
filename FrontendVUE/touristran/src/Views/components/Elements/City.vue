@@ -35,7 +35,11 @@
           </b-row>
 
           <b-button variant="warning" @click="updateCityDB">Actualizar</b-button>
-          <b-button variant="primary" v-b-modal="modalId">Historial de visitantes</b-button>
+          <b-button
+            variant="primary"
+            @click="getTouristsList"
+            v-b-modal="modalId"
+          >Historial de visitantes</b-button>
           <b-button variant="danger" @click="deleteCityDB">Borrar</b-button>
         </b-container>
       </b-form>
@@ -59,13 +63,15 @@
 
 <script>
 import CityDAO from "./../../../DataAccessObjects/CityDAO";
+import BookingDAO from "./../../../DataAccessObjects/BookingDAO";
+import TouristDAO from "./../../../DataAccessObjects/TouristDAO";
 
 export default {
   name: "City",
   data() {
     return {
       response: "",
-      tourists: ["Gonzalo", "Dennis"],
+      tourists: [],
     };
   },
   props: {
@@ -84,6 +90,13 @@ export default {
         this.cities = data;
       });
     },
+    getTouristDB() {
+      var data;
+      TouristDAO.getTourist(this.booking.fkTourist, (data) => {
+        console.log(data);
+        this.tourist = data.name;
+      });
+    },
     updateCityDB() {
       CityDAO.updateCity(this.city, (response) => {
         this.response = response;
@@ -94,6 +107,17 @@ export default {
       CityDAO.deleteCity(this.city.pkCity, (response) => {
         this.response = response;
         this.getCitiesDB();
+      });
+    },
+    getTouristsList() {
+      var bookingList = [];
+      BookingDAO.getBookingByCity(this.city.pkCity, (data) => {
+        data.forEach((element) => {
+          TouristDAO.getTourist(element.fkTourist, (data) => {
+            bookingList.push(data.name);
+            this.tourists = Array.from(new Set(bookingList));
+          });
+        });
       });
     },
   },

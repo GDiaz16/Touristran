@@ -60,11 +60,47 @@ function deleteBooking(id, callback) {
     });
 }
 
+function getBookingByCity(id, callback) {
+  axios
+    .get(`http://localhost:8080/api/booking/city/${id}`)
+    .then(response => {
+      //console.log(response);
+      callback(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+function getBookingByTourist(id, callback) {
+  axios
+    .get(`http://localhost:8080/api/booking/tourist/${id}`)
+    .then(response => {
+      //console.log(response);
+      callback(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+function getBookingByDate(date, callback) {
+  axios
+    .get(`http://localhost:8080/api/booking/date?date=${date}`)
+    .then(response => {
+      //console.log(response);
+      callback(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
 export default {
   getBookings,
   getBooking,
   createBooking,
   updateBooking,
-  deleteBooking
+  deleteBooking,
+  getBookingByCity,
+  getBookingByTourist,
+  getBookingByDate
 };
 

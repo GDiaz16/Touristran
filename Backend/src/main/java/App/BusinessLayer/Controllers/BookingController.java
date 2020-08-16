@@ -4,6 +4,7 @@ import App.BusinessLayer.Services.BookingService;
 import App.DataLayer.Models.BookingModel;
 import App.DataLayer.Models.CityModel;
 import App.DataLayer.Models.TouristModel;
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParseException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @RestController
 @RequestMapping("/api/booking")
@@ -48,6 +50,11 @@ public class BookingController {
     @GetMapping("/city/{id}")
     public List<BookingModel> findByfkCity(@PathVariable int id) {
         return bookingService.findByfkCity(id);
+    }
+
+    @GetMapping("/date")
+    public List<BookingModel> findBydate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return bookingService.findBydate(date);
     }
 
     @PostMapping

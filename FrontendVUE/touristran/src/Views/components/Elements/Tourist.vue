@@ -64,7 +64,7 @@
             </b-col>
           </b-row>
           <b-button variant="primary" @click="updateTouristDB">Actualizar</b-button>
-          <b-button variant="warning" v-b-modal="modalId">Ciudades visitadas</b-button>
+          <b-button variant="warning" @click="getCitiesList" v-b-modal="modalId">Ciudades visitadas</b-button>
           <b-button variant="danger" @click="deleteTouristDB">Borrar</b-button>
         </b-container>
       </b-form>
@@ -74,7 +74,7 @@
         <b-container>
           <b-row>
             <b-col>
-              <ul v-for="(city, index) in cities" :key="index">
+              <ul v-for="(city, index) in citiesVisited" :key="index">
                 <li>{{city}}</li>
               </ul>
             </b-col>
@@ -88,6 +88,7 @@
 <script>
 import TouristDAO from "./../../../DataAccessObjects/TouristDAO";
 import CityDAO from "./../../../DataAccessObjects/CityDAO";
+import BookingDAO from "./../../../DataAccessObjects/BookingDAO";
 
 export default {
   name: "Tourist",
@@ -95,6 +96,7 @@ export default {
     return {
       response: "",
       citiesOption: [],
+      citiesVisited: [],
       typesOfIdentity: [
         { value: "CÉDULA DE CIUDADANIA", text: "CÉDULA DE CIUDADANIA" },
         { value: "CÉDULA DE EXTRANJERÍA", text: "CÉDULA DE EXTRANJERÍA" },
@@ -120,6 +122,13 @@ export default {
         this.tourists = data;
       });
     },
+    getCityDB() {
+      var data;
+      CityDAO.getCity(this.city.pkCity, (data) => {
+        console.log(data);
+        this.cities = data;
+      });
+    },
     updateTouristDB() {
       this.getCitiesDB();
       TouristDAO.updateTourist(this.tourist, (response) => {
@@ -143,6 +152,17 @@ export default {
         });
         this.citiesOption = citiesAux;
       });
+    },
+    getCitiesList(callback) {
+      var bookingList = [];
+      BookingDAO.getBookingByTourist(this.tourist.pkTourist, (data) => {
+        data.forEach((element) => {
+          CityDAO.getCity(element.fkCity, (data) => {
+            bookingList.push(data.name);
+          });
+        });
+      });
+      this.citiesVisited = bookingList;
     },
   },
   computed: {
