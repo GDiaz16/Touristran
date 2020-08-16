@@ -9,13 +9,12 @@ import java.time.LocalDate;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "Tourist")
+// JsonIdentityInfo evita que se generen ciclos al leer la BD
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "pkTourist")
@@ -24,11 +23,10 @@ public class TouristModel {
     public TouristModel() {
     }
 
-    public TouristModel(/*CityModel cityModel, Long fkCity,*/String city, String name, LocalDate birthday, String idOfTourist,
+    public TouristModel(String city, String name, LocalDate birthday, String idOfTourist,
             String idType, int travelFrequencyInMonths,
             double budget, boolean hasCreditCard) {
-//        this.cityModel = cityModel;
-//        this.fkCity = fkCity;
+
         this.name = name;
         this.birthday = birthday;
         this.idOfTourist = idOfTourist;
@@ -39,16 +37,10 @@ public class TouristModel {
         this.city = city;
     }
 
-    @Id
+    @Id // Primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkTourist;
 
-//    @ManyToOne(targetEntity = CityModel.class, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "pkCity", nullable = true)
-//    private CityModel cityModel;
-//
-//    @Column(name = "pkCity", insertable = false, updatable = false)
-//    private Long fkCity;
     private String city;
 
     private String name;
@@ -66,6 +58,7 @@ public class TouristModel {
 
     private boolean hasCreditCard;
 
+    // Relacion uno a muchos con booking
     @OneToMany(mappedBy = "fkTourist", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore
     private List<BookingModel> bookingModelSet;

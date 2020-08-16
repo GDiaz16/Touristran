@@ -3,23 +3,24 @@ package App.DataLayer.Models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "City")
 public class CityModel {
+
     public CityModel(String name, int inhabitants, String mostTouristicPlace,
-                     String mostRelevantHotel) {
+            String mostRelevantHotel) {
         this.name = name;
         this.inhabitants = inhabitants;
         this.mostTouristicPlace = mostTouristicPlace;
         this.mostRelevantHotel = mostRelevantHotel;
     }
 
-    public CityModel() {}
+    public CityModel() {
+    }
 
-    @Id
+    @Id // Primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int PK_CITY;
 

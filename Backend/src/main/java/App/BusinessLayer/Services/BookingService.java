@@ -1,14 +1,10 @@
 package App.BusinessLayer.Services;
 
 import App.BusinessLayer.Repositories.BookingRepository;
-import App.BusinessLayer.Repositories.BookingRepository;
 import App.DataLayer.Models.BookingModel;
-import App.DataLayer.Models.CityModel;
-import App.DataLayer.Models.TouristModel;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;

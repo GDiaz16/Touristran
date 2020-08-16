@@ -6,13 +6,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "City")
+// JsonIdentityInfo evita que se generen ciclos al leer la BD
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "pkCity")
@@ -27,7 +26,7 @@ public class CityModel {
 
     public CityModel() {}
 
-    @Id
+    @Id // Primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkCity;
 
@@ -39,11 +38,9 @@ public class CityModel {
 
     private String mostRelevantHotel;
 
+    // Relacion uno a muchos con booking
     @OneToMany(mappedBy = "fkCity", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore
     private List<BookingModel> bookingModelSet;
 
-//    @OneToMany(mappedBy = "fkCity", cascade = CascadeType.ALL, orphanRemoval = false)
-//    @JsonIgnore
-//    private List<TouristModel> touristModels;
 }

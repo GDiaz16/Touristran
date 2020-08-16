@@ -4,7 +4,6 @@ function getApiCities(callback) {
   axios
     .get("http://localhost:7070/web-api/cities/")
     .then(response => {
-      //console.log(response);
       callback(response.data);
     })
     .catch(function(error) {

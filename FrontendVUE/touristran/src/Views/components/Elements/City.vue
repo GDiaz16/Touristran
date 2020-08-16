@@ -86,14 +86,12 @@ export default {
     getCityDB() {
       var data;
       CityDAO.getCity(this.city.pkCity, (data) => {
-        console.log(data);
         this.cities = data;
       });
     },
     getTouristDB() {
       var data;
       TouristDAO.getTourist(this.booking.fkTourist, (data) => {
-        console.log(data);
         this.tourist = data.name;
       });
     },

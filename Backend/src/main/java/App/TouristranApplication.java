@@ -8,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TouristranApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TouristranApplication.class, args);
-	}
+    public static void main(String[] args) {
+        // Creacion del servidor de Spring boot
+        SpringApplication.run(TouristranApplication.class, args);
+    }
 
 }

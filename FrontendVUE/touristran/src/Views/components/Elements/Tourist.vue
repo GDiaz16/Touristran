@@ -118,14 +118,12 @@ export default {
     getTouristDB() {
       var data;
       TouristDAO.getTourists(this.tourist.pkTourist, (data) => {
-        console.log(data);
         this.tourists = data;
       });
     },
     getCityDB() {
       var data;
       CityDAO.getCity(this.city.pkCity, (data) => {
-        console.log(data);
         this.cities = data;
       });
     },
@@ -133,7 +131,6 @@ export default {
       this.getCitiesDB();
       TouristDAO.updateTourist(this.tourist, (response) => {
         this.response = response;
-        //this.getTouristsDB();
       });
     },
     deleteTouristDB() {
@@ -145,7 +142,6 @@ export default {
     getCitiesDB(callback) {
       var data;
       CityDAO.getCities((data) => {
-        console.log(data);
         var citiesAux = [];
         data.forEach((element) => {
           citiesAux.push({ value: element.name, text: element.name });

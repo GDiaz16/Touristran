@@ -55,29 +55,7 @@ export default {
         mostRelevantHotel: "",
       },
       citiesApi: [],
-      cities: [] /* [
-        {
-          pkCity: 1,
-          name: "Bogotá",
-          inhabitants: 7650231,
-          mostTouristicPlace: "Plaza de Bolivar",
-          mostRelevantHotel: "Hotel Tequendama",
-        },
-        {
-          pkCity: 2,
-          name: "Medellin",
-          inhabitants: 535345,
-          mostTouristicPlace: "UDEA",
-          mostRelevantHotel: "Hotel Barranquilla",
-        },
-        {
-          pkCity: 3,
-          name: "Cali",
-          inhabitants: 95958568,
-          mostTouristicPlace: "Plaza de toros",
-          mostRelevantHotel: "Hotel Sucursal",
-        },
-      ], */,
+      cities: [],
     };
   },
   methods: {
@@ -86,7 +64,6 @@ export default {
       var data;
       getApiCities((data) => {
         var citiesAux = [];
-        console.log(data);
         data.forEach((element) => {
           citiesAux.push({ value: element, text: element.name });
         });
@@ -96,7 +73,6 @@ export default {
     getCitiesDB() {
       var data;
       CityDAO.getCities((data) => {
-        console.log(data);
         this.cities = data;
       });
     },

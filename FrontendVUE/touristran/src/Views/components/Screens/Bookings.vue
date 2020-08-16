@@ -69,28 +69,13 @@ export default {
         fkCity: 1,
         date: "",
       },
-      bookings: [] /* [
-        {
-          pkBooking: 1,
-          touristModel: {
-            pkTourist: 2,
-          },
-          cityModel: {
-            pkCity: 1,
-          },
-          fkTourist: 2,
-          fkCity: 1,
-          date: "2020-10-04",
-        },
-
-      ] */,
+      bookings: [],
     };
   },
   methods: {
     getTouristsDB() {
       var data;
       TouristDAO.getTourists((data) => {
-        console.log(data);
         var touristsAux = [];
         data.forEach((element) => {
           touristsAux.push({ value: element.pkTourist, text: element.name });
@@ -101,7 +86,6 @@ export default {
     getCitiesDB() {
       var data;
       CityDAO.getCities((data) => {
-        console.log(data);
         var citiesAux = [];
         data.forEach((element) => {
           citiesAux.push({ value: element.pkCity, text: element.name });
@@ -117,7 +101,6 @@ export default {
     getBookingDB() {
       var data;
       BookingDAO.getBookings((data) => {
-        console.log(data);
         this.bookings = data;
       });
     },

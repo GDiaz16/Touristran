@@ -114,7 +114,6 @@ export default {
     getTouristsDB() {
       var data;
       TouristDAO.getTourists((data) => {
-        console.log(data);
         this.tourists = data;
       });
     },
@@ -128,7 +127,6 @@ export default {
       this.response = "";
       var data;
       CityDAO.getCities((data) => {
-        console.log(data);
         var citiesAux = [];
         data.forEach((element) => {
           citiesAux.push({ value: element.name, text: element.name });

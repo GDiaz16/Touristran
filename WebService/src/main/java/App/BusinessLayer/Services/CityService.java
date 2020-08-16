@@ -10,22 +10,23 @@ import java.util.List;
 
 @Service
 public class CityService {
+
     @Autowired
     private CityRepository cityRepository;
 
-    public List<CityModel> findAll(){
+    public List<CityModel> findAll() {
         return (List<CityModel>) cityRepository.findAll();
     }
 
-    public CityModel findById(int id){
+    public CityModel findById(int id) {
         return cityRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public CityModel save(CityModel cityModel){
+    public CityModel save(CityModel cityModel) {
         return cityRepository.save(cityModel);
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         cityRepository.deleteById(id);
     }
 }
